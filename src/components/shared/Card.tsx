@@ -5,11 +5,9 @@ type CardProps = {
     children: React.ReactNode;
 };
 
-const Card = ({ title, children }: CardProps) => (
+export const Card = ({ title, children }: CardProps) => (
     <div>
         <h2>{title}</h2>
         {children}
     </div>
 );
-
-export default Card;

@@ -1,4 +1,4 @@
-import RecentExpensesCard from '../cards/RecentExpensesCard';
+import { RecentExpensesCard } from '../cards/RecentExpensesCard';
 
 const DashboardLayout = () => (
     <div className='grid grid-cols-3 gap-6'>

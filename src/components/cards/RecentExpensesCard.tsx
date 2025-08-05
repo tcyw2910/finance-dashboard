@@ -1,7 +1,7 @@
 import { dummyTransactions } from "../data/dummyTransactions";
-import Card from "../shared/Card";
+import { Card } from "../shared/Card";
 
-const RecentExpensesCard = () => {
+export const RecentExpensesCard = () => {
     const recentExpenses = dummyTransactions
         .filter(txn => txn.type === 'expense')
         .slice(0, 4);
@@ -20,5 +20,3 @@ const RecentExpensesCard = () => {
         </Card>
     )
 }
-
-export default RecentExpensesCard;
