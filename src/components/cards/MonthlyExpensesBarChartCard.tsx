@@ -23,9 +23,9 @@ export const MonthlyExpensesBarChartCard = () => {
             <div className="h-100">
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
-                        <CartesianGrid strokeDasharray="3 3"/>
-                        <XAxis dataKey="month"/>
-                        <YAxis />
+                        <CartesianGrid strokeDasharray="0" stroke="var(--text)"/> 
+                        <XAxis dataKey="month" tick={{ fill: 'var(--text)' }} />
+                        <YAxis tick={{ fill: 'var(--text)' }} />
                         <Tooltip />
                         <Bar dataKey="amount" fill="#8884d8"/>
                     </BarChart>

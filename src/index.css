@@ -1,2 +1,21 @@
 /* Global stylesheet - styles here apply to the entire app */
-@import "tailwindcss";
+@import "tailwindcss"; 
+
+:root {
+    --bg: linear-gradient(to right top, #646464, #7a7b7d, #8e9398, #a2acb2, #b5c6cc, #b1cacf, #accdd1, #a8d1d2, #8abec0, #6aacad, #49999c, #1a878a);
+    --text: black;
+    --card: rgba(255, 255, 255, 0.267);
+    --container: rgba(51, 51, 51, 0.151);
+}
+
+.dark {
+    --bg: linear-gradient(to right top, #646464, #665f6c, #6f576e, #7c4d69, #89425d, #8b4267, #8c4472, #8a467d, #665d9c, #3070a6, #007e9e, #1a878a);
+    --text: white;
+    --card: rgba(0, 0, 0, 0.4);
+}
+
+body {
+    background-image: var(--bg);
+    color: var(--text);
+    transition: background-image 0.5s ease, color 0.3s ease;
+}

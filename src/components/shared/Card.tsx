@@ -6,8 +6,8 @@ type CardProps = {
 };
 
 export const Card = ({ title, children }: CardProps) => (
-    <div className="border">
-        <h2>{title}</h2>
+    <div className="rounded-lg p-3 shadow-lg" style={{ backgroundColor: "var(--card)"}}>
+        <h2 className="text-2xl">{title}</h2>
         {children}
     </div>
 );
