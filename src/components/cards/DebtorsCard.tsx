@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Card } from "../shared/Card";
-import { CirclePlus } from "lucide-react";
+import { CirclePlus, Check } from "lucide-react";
 import { AddDebtCreditorModal } from "../modals/AddDebtCreditorModal";
 
 const data = [
@@ -28,7 +28,7 @@ export const DebtorsCard = () => {
                     <li key={index} className="flex justify-between">
                         <span>{item.name}</span>
                         <span>{item.amount}</span>
-                        <button>Paid</button>
+                        <Check size={16} />
                     </li>
                 ))}
             </ul>

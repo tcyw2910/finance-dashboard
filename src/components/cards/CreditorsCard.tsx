@@ -1,5 +1,5 @@
 import { Card } from "../shared/Card";
-import { CirclePlus } from "lucide-react";
+import { CirclePlus, Check } from "lucide-react";
 import { AddDebtCreditorModal } from "../modals/AddDebtCreditorModal";
 import { useState } from "react";
 
@@ -29,7 +29,7 @@ export const CreditorsCard = () => {
                     <li key={index} className="flex justify-between">
                         <span>{item.name}</span>
                         <span>{item.amount}</span>
-                        <button>Paid</button>
+                        <Check size={16}/>
                     </li>   
                 ))}
             </ul>
