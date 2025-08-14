@@ -16,7 +16,11 @@ export const DebtorsCard = () => {
         <Card 
             title="People Owe Me"
             extra={
-                <CirclePlus size={16} onClick={() => setIsModalOpen(true)}></CirclePlus>        
+                <CirclePlus 
+                    size={16} 
+                    onClick={() => setIsModalOpen(true)}
+                    className="cursor-pointer hover:scale-125 duration-200 transition-transform"
+                />       
             }
         >
             <ul>

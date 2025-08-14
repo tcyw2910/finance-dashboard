@@ -10,7 +10,7 @@ export const Card = ({ title, extra, children }: CardProps) => (
     <div className="rounded-lg p-3 shadow-lg" style={{ backgroundColor: "var(--card)"}}>
         <div className="flex justify-between align-center">
             <h2 className="text-2xl">{title}</h2>
-            {extra && <div>{extra}</div>}
+            {extra && <div className="flex items-center">{extra}</div>}
         </div>
         {children}
     </div>
