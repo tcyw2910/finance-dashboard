@@ -11,3 +11,10 @@ export interface Transaction {
     to?: string;
 }
 
+export type Debt = {
+    id: string;
+    name: string;
+    amount: number;
+    type: 'creditor' | 'debtor';
+}
+

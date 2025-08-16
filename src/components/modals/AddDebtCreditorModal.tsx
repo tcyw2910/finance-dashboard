@@ -46,7 +46,12 @@ export const AddDebtCreditorModal = ({ type, onClose, onSave }: AddDebtCreditorM
 
                 <div style={{color: "black"}} className="flex justify-end gap-3">
                     <button type="button" onClick={onClose} className="bg-gray-300 p-1 rounded-lg">Cancel</button>
-                    <button type="submit" className="bg-green-300 p-1 rounded-lg">Submit</button>
+                    <button 
+                        type="submit" 
+                        className="bg-green-300 p-1 rounded-lg"
+                    >
+                        Submit
+                    </button>
                 </div>
             </form>
         </Modal>
