@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card } from "../shared/Card";
 import { CirclePlus, Check } from "lucide-react";
 import { AddDebtCreditorModal } from "../modals/AddDebtCreditorModal";
-import { getDebts, saveDebts } from "../storage/debtStorage";
+import { deleteDebt, getDebts, saveDebts } from "../storage/debtStorage";
 import { type Debt } from "../types";
 
 export const DebtorsCard = () => {
@@ -19,8 +19,12 @@ export const DebtorsCard = () => {
         setDebts(updated);
         saveDebts(updated) // Call storage helper here
         setIsModalOpen(false);
-        console.log("Debt saved");
     }
+
+    const handleDelete = (id: string) => {
+        const updated = deleteDebt(id);
+        setDebts(updated);
+    }   
 
     return (
         <Card 
@@ -34,13 +38,19 @@ export const DebtorsCard = () => {
             }
         >
             <ul>
-                {debts.map((item) => (
-                    <li key={item.id} className="flex justify-between">
-                        <span>{item.name}</span>
-                        <span>{item.amount}</span>
-                        <Check size={16} />
+                {debts.length === 0 ? (
+                    <li className="italic text-center text-gray-700">
+                        No one owes you money yet.
                     </li>
-                ))}
+                ) : (
+                    debts.map((item) => (
+                        <li key={item.id} className="flex justify-between items-center">
+                            <span>{item.name}</span>
+                            <span>£{item.amount}</span>
+                            <Check onClick={() => handleDelete(item.id)} size={16}/>
+                        </li>
+                    ))
+                )}
             </ul>
 
             {isModalOpen && (

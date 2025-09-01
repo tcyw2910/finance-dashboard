@@ -14,10 +14,26 @@ export function getDebts(): Debt[] {
     return getItem<Debt[]>(DEBTS_KEY, []); // always returns an array
 }
 
+export function deleteDebt(id: string) {
+    const debts = getDebts();
+    const updated = debts.filter((d) => d.id !== id);
+    saveDebts(updated);
+    return updated;
+}
+
+// Function to save creditors data
 export function saveCreditors(creditors: Debt[]) {
     saveItem(CREDITORS_KEY, creditors);
 }
 
+// Function to retrieve creditors data
 export function getCreditors(): Debt[] {
     return getItem<Debt[]>(CREDITORS_KEY, []);
+}
+
+export function deleteCreditor(id: string) {
+    const creditors = getCreditors();
+    const updated = creditors.filter((d) => d.id !== id);
+    saveCreditors(updated)
+    return updated;
 }

@@ -3,7 +3,7 @@ import { CirclePlus, Check } from "lucide-react";
 import { AddDebtCreditorModal } from "../modals/AddDebtCreditorModal";
 import { useState } from "react";
 import { type Debt } from "../types";
-import { getCreditors, saveCreditors} from "../storage/debtStorage";
+import { deleteCreditor, getCreditors, saveCreditors} from "../storage/debtStorage";
 
 export const CreditorsCard = () => {
     const [isModalOpen, setIsModalOpen] = useState(false); 
@@ -21,6 +21,11 @@ export const CreditorsCard = () => {
         setIsModalOpen(false);
     }
 
+    const handleDelete = (id: string) => {
+        const updated = deleteCreditor(id)
+        setCreditors(updated);
+    }
+
     return (
         <Card 
             title="People I Owe"
@@ -33,12 +38,18 @@ export const CreditorsCard = () => {
             }
         >
             <ul>
-                {creditors.map((item) => (
-                    <li key={item.id} className="flex justify-between">
-                        <span>{item.name}</span>
-                        <span>{item.amount}</span>
-                        <Check size={16}/>
-                    </li>   
+                {creditors.length === 0 ? (
+                    <li className="italic text-center text-gray-700">
+                        You owe no money to anyone right now. Well done.
+                    </li>
+                ) : (
+                    creditors.map((item) => (
+                        <li key={item.id} className="flex justify-between items-center">
+                            <span>{item.name}</span>
+                            <span>£{item.amount}</span>
+                            <Check onClick={() => handleDelete(item.id)} size={16}/>
+                        </li>
+                    )
                 ))}
             </ul>
 
