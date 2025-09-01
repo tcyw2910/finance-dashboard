@@ -5,12 +5,6 @@ import { AddDebtCreditorModal } from "../modals/AddDebtCreditorModal";
 import { getDebts, saveDebts } from "../storage/debtStorage";
 import { type Debt } from "../types";
 
-const data = [
-    { name: "Gordon", amount: 10},
-    { name: "Viktorija", amount: 90},
-];
-
-
 export const DebtorsCard = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [debts, setDebts] = useState<Debt[]>(getDebts());
