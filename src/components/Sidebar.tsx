@@ -8,11 +8,18 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     
     return (
         <div 
-            className={`fixed top-0 left-0 h-full w-1/3 bg-white shadow-lg z-50 rounded-lg
-                ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
+            className={`flex-shrink-0 h-full bg-white shadow-lg rounded-lg transform transition-all duration-300 ease-in-out
+                ${isOpen 
+                    ? 'translate-x-0 opacity-100 pointer-events-auto' 
+                    : '-translate-x-full opacity-0 pointer-events-none'
+                }`}
+                style={{ 
+                    width: '16rem', 
+                    maxWidth: '30%',
+                    backgroundColor: "var(--container)" 
+                }}
         >
             <div className="flex justify-between items-center">
-                <h2>Menu</h2>
                 <ArrowLeftToLine
                     size={20} 
                     type="button" 
@@ -22,10 +29,9 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                     Close
                 </ArrowLeftToLine>
             </div>
-            <nav className={`${isOpen ? 'flex flex-row space-y-3' : 'flex flex-col space-y-4 p-4'}`}>
+            <nav className='flex flex-col space-y-4 p-4'>
                 <button 
                     type="button" 
-                    className="text-black"
                 >
                     Day Trading
                 </button>
