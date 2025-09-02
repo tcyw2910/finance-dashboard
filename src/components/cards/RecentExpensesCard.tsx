@@ -1,19 +1,24 @@
 import { dummyTransactions } from "../data/dummyTransactions";
 import { Card } from "../shared/Card";
+import { type Transaction } from "../types";
 
-export const RecentExpensesCard = () => {
-    const recentExpenses = dummyTransactions
-        .filter(txn => txn.type === 'expense')
-        .slice(0, 4);
+interface Props {
+    transactions: Transaction[];
+}
+
+export const RecentExpensesCard = ({ transactions }: Props) => {
+    const recentExpenses = [...transactions]
+        .sort((a, b) => new Date(b.date).getTime - new Date(a.date).getTime()) // converts the string to a timestamp for comparison.
+        .slice(0, 4); // Take top 4
 
     return (
         <Card title="Recent Expenses">
             <ul>
-                {recentExpenses.map(txn => (
-                    <li key={txn.id} className="flex justify-between">
-                        <span>{txn.date}</span>
+                {recentExpenses.map((txn, index) => (
+                    <li key={index} className="flex justify-between">
+                        <span>{new Date(txn.date).toLocaleDateString()}</span> {/* .toLocaleDateString() formats the date nicely */}
                         <span>{txn.category}</span>
-                        <span>£{txn.amount}</span>
+                        <span>£{txn.amount.toFixed(2)}</span> {/* ensures amounts always show 2 decimals. */}
                     </li>
                 ))}
             </ul>

@@ -7,6 +7,7 @@ import { useState } from 'react';
 
 function App() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [transactions, setTransactions] = useState<Transaction[]>([]);
     
 
     return (
@@ -35,9 +36,12 @@ function App() {
                         <Header 
                             isSidebarOpen={isSidebarOpen}
                             setIsSidebarOpen={setIsSidebarOpen}
+                            setCsvData={setTransactions}
                         />
                         <div className='flex-1'>
-                            <DashboardLayout />
+                            <DashboardLayout 
+                                transactions={transactions}
+                            />
                         </div>
                     </div>
                 </div>   

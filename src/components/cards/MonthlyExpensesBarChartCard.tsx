@@ -1,28 +1,32 @@
 import { BarChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis, Tooltip, Bar } from "recharts";
 import { Card } from "../shared/Card";
+import { type Transaction } from "../types";
 
-// Mock data representing expenses each month
-const data = [
-    { month: 'Jan', amount: 500},
-    { month: 'Feb', amount: 100},
-    { month: 'Mar', amount: 250},
-    { month: 'Apr', amount: 400},
-    { month: 'May', amount: 450},
-    { month: 'Jun', amount: 340},
-    { month: 'Jul', amount: 230},
-    { month: 'Aug', amount: 100},
-    { month: 'Sept', amount: 50},
-    { month: 'Oct', amount: 1000},
-    { month: 'Nov', amount: 2500},
-    { month: 'Dec', amount: 300},
-]
+interface Props {
+    transactions: Transaction[];
+}
 
-export const MonthlyExpensesBarChartCard = () => {
+export const MonthlyExpensesBarChartCard = ({ transactions }: Props) => {
+    
+    // Initialise an object to store the monthly totals
+    const monthlyTotals: Record<string, number> = {};
+
+    // Loop through all transactions 
+    transactions.forEach((t) => {
+        const month = new Date(t.date).toLocaleString('default', { month: 'short' }); // convert date string into JS Date object & give 3-letter month abbreviation
+
+        if (!monthlyTotals[month]) monthlyTotals[month] = 0;
+        monthlyTotals[month] += t.amount;
+    });
+
+    // Convert object into an array for Recharts
+    const barChartData = Object.entries(monthlyTotals).map(([month, amount]) => ({ month, amount }))
+    
     return (
         <Card title="Monthly Expenses">
             <div className="h-100">
                 <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+                    <BarChart data={barChartData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
                         <CartesianGrid strokeDasharray="0" stroke="var(--text)"/> 
                         <XAxis dataKey="month" tick={{ fill: 'var(--text)' }} />
                         <YAxis tick={{ fill: 'var(--text)' }} />

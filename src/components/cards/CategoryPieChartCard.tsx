@@ -1,26 +1,33 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
 import { Card } from "../shared/Card";
+import { type Transaction } from "../types";
 
 const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#8dd1e1', '#d0ed57', '#a28dd1'];
 
-const data = [
-    { name: 'Groceries', value: 300 },
-    { name: 'Transport', value: 100 },
-    { name: 'Bills', value: 600 },
-    { name: 'Eating Out', value: 200 },
-    { name: 'Other', value: 150 },
-    { name: 'Entertainment', value: 50 },
-    { name: 'Treating myself', value: 60 },
-];
+interface Props {
+    transactions: Transaction[];
+}
 
-export const CategoryPieChartCard = () => {
+export const CategoryPieChartCard = ({ transactions }: Props) => {
+
+    // Aggregate amounts by category - array.reduce((accumulator, currentValue) => {...}, initialValue);
+    const categoryData = transactions.reduce((acc: Record<string, number>, t) => {
+        if (!acc[t.category]) acc[t.category] = 0;
+        acc[t.category] += t.amount;
+        return acc;
+    }, {});
+
+    // Convert to array for PieChart
+    const pieData = Object.entries(categoryData).map(([name, value]) => ({ name, value })).filter(d => d.value > 0);
+
+
     return (
         <Card title="Overall expenses by category">
             <div className="h-100">
                 <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                         <Pie
-                            data={data}
+                            data={pieData}
                             dataKey="value"
                             nameKey="name"
                             cx="50%"
@@ -28,7 +35,7 @@ export const CategoryPieChartCard = () => {
                             outerRadius={80}
                             label
                         >
-                            {data.map((_, index) => (
+                            {pieData.map((_, index) => (
                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                             ))}
                         </Pie>
