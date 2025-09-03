@@ -4,17 +4,18 @@ import { Modal } from "./Modal";
 type AddDebtCreditorModalProps = {
     type: "creditor" | "debtor";
     onClose: () => void;
-    onSave: (debt: { name: string; amount: number;}) => void;
+    onSave: (debt: { name: string; amount: number; description: string}) => void;
 };
 
 export const AddDebtCreditorModal = ({ type, onClose, onSave }: AddDebtCreditorModalProps) => {
     // Keep track of name and amount being set by user 
     const [name, setName] = useState("");
     const [amount, setAmount] = useState("");
+    const [description, setDescription] = useState("");
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onSave({ name, amount: parseFloat(amount) });
+        onSave({ name, amount: parseFloat(amount), description });
     };
 
     return (
@@ -39,8 +40,16 @@ export const AddDebtCreditorModal = ({ type, onClose, onSave }: AddDebtCreditorM
                         type="number"
                         value={amount}
                         onChange={(e) => setAmount(e.target.value)}
-                        className="border rounded-lg w-20"
+                        className="border rounded-lg w-20 mb-3"
                         required 
+                    />
+
+                    <label>Description</label>
+                    <input
+                        type="text"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        className="border rounded-lg w-80 mb-3"
                     />
                 </div>
 

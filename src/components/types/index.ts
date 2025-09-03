@@ -15,6 +15,7 @@ export type Debt = {
     id: string;
     name: string;
     amount: number;
+    description: string;
     type: 'creditor' | 'debtor';
 }
 

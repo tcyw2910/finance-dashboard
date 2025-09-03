@@ -9,7 +9,7 @@ export const DebtorsCard = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [debts, setDebts] = useState<Debt[]>(getDebts());
 
-    const handleSave = (newDebt: { name: string, amount: number }) => {
+    const handleSave = (newDebt: { name: string, amount: number, description: string }) => {
         const debt: Debt = { 
             id: crypto.randomUUID(), 
             type: 'debtor',
@@ -47,6 +47,7 @@ export const DebtorsCard = () => {
                         <li key={item.id} className="flex justify-between items-center">
                             <span>{item.name}</span>
                             <span>£{item.amount}</span>
+                            <span>{item.description}</span>
                             <Check onClick={() => handleDelete(item.id)} size={16}/>
                         </li>
                     ))
